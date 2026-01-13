@@ -3,7 +3,7 @@
 
 @section('title', 'Edit Game')
 @section('page-title', 'Edit Game')
-
+<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 @section('content')
 <div class="row">
     <div class="col-md-8 mx-auto">
@@ -12,7 +12,7 @@
                 <h5 class="mb-0">Edit: {{ $game->title }}</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.games.update', $game) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('games.update', $game) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -74,7 +74,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" 
+                        <textarea id="editor" name="description" class="form-control @error('description') is-invalid @enderror" 
                                   rows="4">{{ old('description', $game->description) }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -128,7 +128,7 @@
                     </div>
 
                     <div class="d-flex gap-2 justify-content-end">
-                        <a href="{{ route('admin.games.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('games.index') }}" class="btn btn-secondary">
                             <i class="bi bi-x-circle"></i> Cancel
                         </a>
                         <button type="submit" class="btn btn-gradient">
@@ -140,4 +140,8 @@
         </div>
     </div>
 </div>
+<script>
+    // Activate CKEditor on the textarea
+    CKEDITOR.replace('editor');
+</script>
 @endsection

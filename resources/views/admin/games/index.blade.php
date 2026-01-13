@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-between align-items-center">
             <h2>All Games</h2>
-            <a href="{{ route('admin.games.create') }}" class="btn btn-gradient">
+            <a href="{{ route('games.create') }}" class="btn btn-gradient">
                 <i class="bi bi-plus-circle"></i> Add New Game
             </a>
         </div>
@@ -18,7 +18,7 @@
 <!-- Filters -->
 <div class="card mb-4">
     <div class="card-body">
-        <form action="{{ route('admin.games.index') }}" method="GET" class="row g-3">
+        <form action="{{ route('games.index') }}" method="GET" class="row g-3">
             <div class="col-md-4">
                 <input type="text" name="search" class="form-control" placeholder="Search games..." value="{{ request('search') }}">
             </div>
@@ -41,7 +41,7 @@
                 <button type="submit" class="btn btn-primary me-2">
                     <i class="bi bi-search"></i> Search
                 </button>
-                <a href="{{ route('admin.games.index') }}" class="btn btn-secondary">
+                <a href="{{ route('games.index') }}" class="btn btn-secondary">
                     <i class="bi bi-arrow-clockwise"></i> Reset
                 </a>
             </div>
@@ -86,8 +86,8 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="game-thumb">{{ $game->icon }}</div>
                                 <div>
-                                    <div class="fw-semibold">{{ $game->title }}</div>
-                                    <small class="text-muted">{{ Str::limit($game->description, 50) }}</small>
+                                    <div class="fw-semibold">{!!  $game->title !!}</div>
+                                    <small class="text-muted">{!!  Str::limit($game->description, 50) !!}</small>
                                 </div>
                             </div>
                         </td>
@@ -106,13 +106,13 @@
                         <td>{{ $game->created_at->format('M d, Y') }}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a href="{{ route('admin.games.edit', $game) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('games.edit', $game) }}" class="btn btn-sm btn-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <button type="button" class="btn btn-sm btn-info toggle-status" data-id="{{ $game->id }}">
                                     <i class="bi bi-toggle-on"></i>
                                 </button>
-                                <form action="{{ route('admin.games.destroy', $game) }}" method="POST" class="d-inline delete-form">
+                                <form action="{{ route('games.destroy', $game) }}" method="POST" class="d-inline delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
@@ -127,7 +127,7 @@
                         <td colspan="8" class="text-center py-5">
                             <i class="bi bi-inbox" style="font-size: 3rem; color: #cbd5e0;"></i>
                             <p class="text-muted mt-2">No games found</p>
-                            <a href="{{ route('admin.games.create') }}" class="btn btn-gradient">Add First Game</a>
+                            <a href="{{ route('games.create') }}" class="btn btn-gradient">Add First Game</a>
                         </td>
                     </tr>
                     @endforelse
@@ -173,7 +173,7 @@ $(document).ready(function() {
             return $(this).val();
         }).get();
 
-        $.post('{{ route("admin.games.bulk-delete") }}', { ids: ids })
+        $.post('{{ route("games.bulk-delete") }}', { ids: ids })
             .done(function(response) {
                 location.reload();
             });

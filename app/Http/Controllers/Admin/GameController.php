@@ -84,7 +84,7 @@ class GameController extends Controller
 
         Game::create($validated);
 
-        return redirect()->route('admin.games.index')
+        return redirect()->route('games.index')
             ->with('success', 'Game created successfully!');
     }
 
@@ -149,7 +149,7 @@ class GameController extends Controller
 
         $game->delete();
 
-        return redirect()->route('admin.games.index')
+        return redirect()->route('games.index')
             ->with('success', 'Game deleted successfully!');
     }
 

@@ -98,6 +98,14 @@ class GameSeeder extends Seeder
                 'plays' => 4200,
                 'rating' => 4.1,
                 'status' => 'active',
+            ], [
+                'icon' => '🎮',
+                'title' => 'Modern Gamer',
+                'category' => 'Sports',
+                'description' => 'Experience the ultimate gaming challenge',
+                'plays' => 4200,
+                'rating' => 4.1,
+                'status' => 'active',
             ],
         ];
 

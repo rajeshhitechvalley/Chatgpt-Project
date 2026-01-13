@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GameController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('single');
 });
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('users', [UserController::class, 'index']);
