@@ -1,7 +1,3 @@
-{{-- ============================================================================
-FILE: resources/views/admin/games/create.blade.php
-DESCRIPTION: Form to create/insert a new game into the database
-============================================================================ --}}
 
 @extends('admin.layouts.app')
 
@@ -134,13 +130,28 @@ DESCRIPTION: Form to create/insert a new game into the database
                                         class="form-select @error('category') is-invalid @enderror"
                                         required>
                                         <option value="">-- Select Category --</option>
+                                        <option value="Featured" {{ old('category') == 'Featured' ? 'selected' : '' }}>⚔️ Featured Game</option>
                                         <option value="Action" {{ old('category') == 'Action' ? 'selected' : '' }}>⚔️ Action</option>
+                                        <option value="New" {{ old('category') == 'New' ? 'selected' : '' }}>🗺️ New Game</option>
                                         <option value="Adventure" {{ old('category') == 'Adventure' ? 'selected' : '' }}>🗺️ Adventure</option>
+                                        <option value="Popular" {{ old('category') == 'Popular' ? 'selected' : '' }}>🧩 Popular Game</option>
                                         <option value="Puzzle" {{ old('category') == 'Puzzle' ? 'selected' : '' }}>🧩 Puzzle</option>
+                                        <option value="Original" {{ old('category') == 'Original' ? 'selected' : '' }}>🧩 Original Game</option>
+                                        <option value="Updated" {{ old('category') == 'Updated' ? 'selected' : '' }}>🧩 Updated Game</option>
                                         <option value="Sports" {{ old('category') == 'Sports' ? 'selected' : '' }}>⚽ Sports</option>
                                         <option value="Racing" {{ old('category') == 'Racing' ? 'selected' : '' }}>🏎️ Racing</option>
+                                        <option value="Basketball" {{ old('category') == 'Basketball' ? 'selected' : '' }}>🏀 Basketball</option>
                                         <option value="Strategy" {{ old('category') == 'Strategy' ? 'selected' : '' }}>🎯 Strategy</option>
+                                        <option value="Soccer" {{ old('category') == 'Soccer' ? 'selected' : '' }}>⚾ Soccer</option>
+                                        <option value="Escape" {{ old('category') == 'Escape' ? 'selected' : '' }}> 🚪 Escape</option>
+                                        <option value="Controller" {{ old('category') == 'Controller' ? 'selected' : '' }}>🎮 Controller</option>
+                                        <option value="Bike" {{ old('category') == 'Bike' ? 'selected' : '' }}>🏍 Bike</option>
+                                        <option value="Clicker" {{ old('category') == 'Clicker' ? 'selected' : '' }}>👆 Clicker</option>
+                                        <option value="Car" {{ old('category') == 'Car' ? 'selected' : '' }}> 🚗 Car</option>
+                                        <option value="Driving" {{ old('category') == 'Driving' ? 'selected' : '' }}> 🚗 Driving</option>
+                                        <option value="Card" {{ old('category') == 'Card' ? 'selected' : '' }}> 🃏 Card</option>
                                         <option value="Casual" {{ old('category') == 'Casual' ? 'selected' : '' }}>🎲 Casual</option>
+                                        <option value="Comet" {{ old('category') == 'Comet' ? 'selected' : '' }}>🗡️ Comet</option>
                                         <option value="RPG" {{ old('category') == 'RPG' ? 'selected' : '' }}>🗡️ RPG</option>
                                         <option value="Shooting" {{ old('category') == 'Shooting' ? 'selected' : '' }}>🔫 Shooting</option>
                                         <option value="Fighting" {{ old('category') == 'Fighting' ? 'selected' : '' }}>🥊 Fighting</option>

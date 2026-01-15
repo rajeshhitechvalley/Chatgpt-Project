@@ -1,8 +1,3 @@
-{{-- ============================================================================
-FILE: resources/views/frontend/game-detail.blade.php
-DESCRIPTION: Single game play page with iframe, details, and related games
-============================================================================ --}}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,278 +12,14 @@ DESCRIPTION: Single game play page with iframe, details, and related games
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <style>
-        :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 24px;
-        }
-
-        /* Game Container */
-        .game-container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        /* Game iframe */
-        .game-frame {
-            width: 100%;
-            height: 600px;
-            border: none;
-            background: #000;
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .game-frame {
-                height: 400px;
-            }
-        }
-
-        /* Game Header */
-        .game-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px;
-        }
-
-        .game-icon {
-            font-size: 60px;
-            line-height: 1;
-        }
-
-        .game-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .game-meta {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        /* Game Controls */
-        .game-controls {
-            background: #f8f9fa;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .btn-play {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: transform 0.2s;
-        }
-
-        .btn-play:hover {
-            transform: scale(1.05);
-            color: white;
-        }
-
-        .btn-fullscreen, .btn-favorite {
-            background: white;
-            border: 2px solid #dee2e6;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .btn-fullscreen:hover, .btn-favorite:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        /* Game Info Section */
-        .game-info {
-            padding: 30px;
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #1e293b;
-        }
-
-        .game-description {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #64748b;
-        }
-
-        /* Related Games */
-        .related-game-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .related-game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .related-game-thumb {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-        }
-
-        .related-game-info {
-            padding: 15px;
-        }
-
-        .related-game-title {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #1e293b;
-        }
-
-        .related-game-category {
-            font-size: 12px;
-            color: #94a3b8;
-        }
-
-        /* Rating Stars */
-        .rating-stars {
-            color: #fbbf24;
-            font-size: 18px;
-        }
-
-        /* Tags */
-        .game-tag {
-            display: inline-block;
-            background: #e0e7ff;
-            color: #4f46e5;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-
-        /* Share Buttons */
-        .share-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .share-btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: none;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .share-btn:hover {
-            opacity: 0.8;
-        }
-
-        .share-btn.facebook { background: #1877f2; }
-        .share-btn.twitter { background: #1da1f2; }
-        .share-btn.whatsapp { background: #25d366; }
-        .share-btn.copy { background: #6b7280; }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 600px;
-            background: #000;
-        }
-
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid white;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Footer */
-        .footer {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px 0;
-            margin-top: 50px;
-            text-align: center;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('single.css') }}">
 </head>
 <body>
     {{-- Navigation Bar --}}
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand" href="/">
                 🎮 CrazyGames
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -337,7 +68,7 @@ DESCRIPTION: Single game play page with iframe, details, and related games
                                     </div>
                                     <div class="meta-item">
                                         <i class="bi bi-calendar"></i>
-                                        <span>25026</span>
+                                        <span>{{ $game->created_at->format('M d, Y') ?? 'Test game is not configured yet' }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -347,9 +78,7 @@ DESCRIPTION: Single game play page with iframe, details, and related games
                     {{-- Game Controls --}}
                     <div class="game-controls">
                         <div class="d-flex gap-2">
-                            <button class="btn-play" id="playBtn" onclick="loadGame()">
-                                <i class="bi bi-play-fill"></i> Play Now
-                            </button>
+                           
                             <button class="btn-fullscreen" onclick="toggleFullscreen()">
                                 <i class="bi bi-arrows-fullscreen"></i>
                             </button>
@@ -366,8 +95,9 @@ DESCRIPTION: Single game play page with iframe, details, and related games
                     <div id="gameContainer">
                         <div class="loading-spinner">
                             <div>
-                                <div class="spinner"></div>
-                                <p class="text-white mt-3">Click "Play Now" to start</p>
+                                 <button class="btn-play" id="playBtn" onclick="loadGame()">
+                                <i class="bi bi-play-fill"></i> Play Now
+                            </button>
                             </div>
                         </div>
                     </div>
@@ -376,15 +106,15 @@ DESCRIPTION: Single game play page with iframe, details, and related games
                 {{-- Game Information --}}
                 <div class="game-info">
                     {{-- Description --}}
-                    <div class="mb-4">
-                        <h2 class="section-title">About {{ $game->title ?? 'Test game is not configured yet'}}</h2>
+                    <div class="mb-4 bg-light p-3 rounded">
+                        <h2 class="section-title">About {!! $game->title ?? 'Test game is not configured yet' !!}</h2>
                         <p class="game-description">
-                            {{ $game->description ?? 'Experience exciting gameplay in this amazing game. Challenge yourself and have fun!' }}
+                            {!! $game->description ?? 'Experience exciting gameplay in this amazing game. Challenge yourself and have fun!' !!}
                         </p>
                     </div>
 
                     {{-- Game Details --}}
-                    <div class="mb-4">
+                    <div class="mb-4 bg-light p-3 rounded">
                         <h2 class="section-title">Game Details</h2>
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -414,7 +144,7 @@ DESCRIPTION: Single game play page with iframe, details, and related games
                     </div>
 
                     {{-- Share Section --}}
-                    <div class="mb-4">
+                    <div class="mb-4 bg-light p-3 rounded">
                         <h2 class="section-title">Share This Game</h2>
                         <div class="share-buttons">
                             <button class="share-btn facebook" onclick="shareOnFacebook()">
@@ -440,7 +170,6 @@ DESCRIPTION: Single game play page with iframe, details, and related games
                 <div class="mb-4">
                     <h3 class="section-title">Related Games</h3>
                     <div class="d-flex flex-column gap-3">
-                       
                         <a href="" class="related-game-card">
                             <div class="related-game-thumb">11</div>
                             <div class="related-game-info">
@@ -450,10 +179,8 @@ DESCRIPTION: Single game play page with iframe, details, and related games
                                 </div>
                             </div>
                         </a>
-    
                     </div>
                 </div>
-
                 {{-- Recent Games --}}
                 <div class="mb-4">
                     <h3 class="section-title">Recent Games</h3>
@@ -476,17 +203,7 @@ DESCRIPTION: Single game play page with iframe, details, and related games
     </div>
 
     {{-- Footer --}}
-    <footer class="footer">
-        <div class="container">
-            <p class="mb-2">&copy; 2026 CrazyGames. All rights reserved.</p>
-            <div class="d-flex justify-content-center gap-3">
-                <a href="#" class="text-decoration-none">About</a>
-                <a href="#" class="text-decoration-none">Privacy</a>
-                <a href="#" class="text-decoration-none">Terms</a>
-                <a href="#" class="text-decoration-none">Contact</a>
-            </div>
-        </div>
-    </footer>
+ @include('partials.footer')
 
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

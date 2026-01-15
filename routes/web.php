@@ -5,10 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GameController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('single');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/games', [HomeController::class, 'allGames'])->name('games.all');
+Route::get('/game/{slug}', [HomeController::class, 'show'])->name('game.show');
+Route::get('/category/{category}', [HomeController::class, 'category'])->name('category.show');
+
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('users', [UserController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

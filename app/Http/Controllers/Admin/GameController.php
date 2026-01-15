@@ -212,4 +212,13 @@ class GameController extends Controller
             'Multiplayer'
         ];
     }
+    public function category($category)
+{
+    $games = Game::active()
+        ->where('category', $category)
+        ->get();
+
+    return view('partials.nav', compact('games', 'category'));
+}
+
 }
